@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2013-05-26T00:01:50+08:00</updated>
+  <updated>2013-05-26T13:12:39+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -18,7 +18,15 @@
     <link href="http://iamlittlefive.github.io/blog/2013/05/25/my-first-blog-in-github/"/>
     <updated>2013-05-25T22:28:00+08:00</updated>
     <id>http://iamlittlefive.github.io/blog/2013/05/25/my-first-blog-in-github</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<h2>欢迎来到Little Five的博客</h2>
+
+<p><strong>Littlefive</strong>是高中时某童鞋给取得外号，和自己名字比较接近，就一直保留使用。</p>
+
+<p><strong>LittleFive</strong>对python、windows编程比较感兴趣，以后会经常在这里发表一些学习经验，希望朋友们多多指教。</p>
+
+<hr />
+
+<p>我的年轻没有失败</p>
 ]]></content>
   </entry>
   
