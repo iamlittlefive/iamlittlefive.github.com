@@ -103,13 +103,13 @@
 
 <p><strong>问题1</strong>：bundle install时，总是有依赖文件安装不成功。我遇到两次，一次是fast-stemmer,这个把rubygems.org替换成ruby.taobao.org之后就OK了；另外一次是rdiscount 2.0.7.3安装不成功，后来把gemfile里面的2.0.7改成1.6.8就OK了，但是这样在使用的时候又遇到了其他问题，解决办法是，到github上把rdiscount 2.0.7.3单独下载下来，解压其中的文件，替换1.6.8里面的。哦，这些依赖文件都放在“YourRubyPath\lib\ruby\gems\1.9.1\gems”里。</p>
 
-<p><strong>问题2</strong>：发布文章时，也就是rake deploy时，总是提示permission denied(public key)。github对这个问题有[解答]（<a href="https://help.github.com/articles/error-permission-denied-publickey%EF%BC%89%E3%80%82">https://help.github.com/articles/error-permission-denied-publickey%EF%BC%89%E3%80%82</a> 可能需要把public key和private key都添加过去才能搞定，我这边是这样的。</p>
+<p><strong>问题2</strong>：发布文章时，也就是rake deploy时，总是提示permission denied(public key)。github对这个问题有<a href="https://help.github.com/articles/error-permission-denied-publickey">解答</a>。 可能需要把public key和private key都添加过去才能搞定，我这边是这样的。</p>
 
 <blockquote><p><strong>生成public key:</strong> ssh-keygen -t rsa</p>
 
 <p><strong>生成private key:</strong>ssh-keygen -t dsa</p></blockquote>
 
-<p><strong>问题3</strong>：发布文章时遇到的另外一个问题是包含中文时，提示神马编码错误(好像是<strong><em>invalid byte sequence in GBK</em></strong>)，在v2ex上找到一个[解决办法]（<a href="http://www.v2ex.com/t/26027%EF%BC%89%EF%BC%9A">http://www.v2ex.com/t/26027%EF%BC%89%EF%BC%9A</a> 把报错文件中的self.content = File.read(File.join(base, name)）改成self.content = File.read(File.join(base, name), :encoding => &ldquo;utf-8&rdquo;)</p>
+<p><strong>问题3</strong>：发布文章时遇到的另外一个问题是包含中文时，提示神马编码错误(好像是<strong><em>invalid byte sequence in GBK</em></strong>)，在v2ex上找到一个<a href="http://www.v2ex.com/t/26027">解决办法</a> ：把报错文件中的self.content = File.read(File.join(base, name)）改成self.content = File.read(File.join(base, name), :encoding => &ldquo;utf-8&rdquo;)</p>
 
 <p>OK，记得的差不多就这么多，还在折腾中。。。Fighting!</p>
 </div>
