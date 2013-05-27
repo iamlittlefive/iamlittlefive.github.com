@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2013-05-27T00:25:34+08:00</updated>
+  <updated>2013-05-27T23:04:23+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[搭建博客时遇到的一些问题]]></title>
+    <link href="http://iamlittlefive.github.io/blog/2013/05/27/the-problem-when-build-the-blog/"/>
+    <updated>2013-05-27T22:29:00+08:00</updated>
+    <id>http://iamlittlefive.github.io/blog/2013/05/27/the-problem-when-build-the-blog</id>
+    <content type="html"><![CDATA[<h2>如何用build搭建博客</h2>
+
+<p>Google一下<strong>“Github + octopress”</strong>能搜出好多文章来。我也是根据各位大虾的经验一步一步来的。这里就不再赘述了。</p>
+
+<h2>我遇到的一些问题</h2>
+
+<p><strong>问题1</strong>：bundle install时，总是有依赖文件安装不成功。我遇到两次，一次是fast-stemmer,这个把rubygems.org替换成ruby.taobao.org之后就OK了；另外一次是rdiscount 2.0.7.3安装不成功，后来把gemfile里面的2.0.7改成1.6.8就OK了，但是这样在使用的时候又遇到了其他问题，解决办法是，到github上把rdiscount 2.0.7.3单独下载下来，解压其中的文件，替换1.6.8里面的。哦，这些依赖文件都放在“YourRubyPath\lib\ruby\gems\1.9.1\gems”里。</p>
+
+<p><strong>问题2</strong>：发布文章时，也就是rake deploy时，总是提示permission denied(public key)。github对这个问题有解答（<a href="https://help.github.com/articles/error-permission-denied-publickey%EF%BC%89%E3%80%82%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E6%8A%8Apublic">https://help.github.com/articles/error-permission-denied-publickey%EF%BC%89%E3%80%82%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E6%8A%8Apublic</a> key和private key都添加过去才能搞定，我这边是这样的。</p>
+
+<blockquote><p><strong>生成public key:</strong> ssh-keygen -t rsa</p>
+
+<p><strong>生成private key:</strong>ssh-keygen -t dsa</p></blockquote>
+
+<p><strong>问题3</strong>：发布文章时遇到的另外一个问题是包含中文时，提示神马编码错误(好像是<strong><em>invalid byte sequence in GBK</em></strong>)，在v2ex上找到一个解决办法（<a href="http://www.v2ex.com/t/26027%EF%BC%89%EF%BC%9A%E6%8A%8A%E6%8A%A5%E9%94%99%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84self.content">http://www.v2ex.com/t/26027%EF%BC%89%EF%BC%9A%E6%8A%8A%E6%8A%A5%E9%94%99%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84self.content</a> = File.read(File.join(base, name)）改成self.content = File.read(File.join(base, name), :encoding => &ldquo;utf-8&rdquo;)</p>
+
+<p>OK，记得的差不多就这么多，还在折腾中。。。Fighting!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[My First Blog in Github]]></title>
