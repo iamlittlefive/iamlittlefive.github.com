@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>搭建博客时遇到的一些问题 - LittlO fiVE</title>
+  <title>pywinauto - LittlO fiVE</title>
   <meta name="author" content="littlefive">
 
   
-  <meta name="description" content="如何用build搭建博客 Google一下“Github + octopress”能搜出好多文章来。我也是根据各位大虾的经验一步一步来的。这里就不再赘述了。 我遇到的一些问题 问题1：bundle install时，总是有依赖文件安装不成功。我遇到两次，一次是fast-stemmer, &hellip;">
+  <meta name="description" content="学习使用pywinauto 安装pywinauto 在32位系统下，安装基本没啥问题。下载完安装（python setup.py install）即可。 在64位系统下，安装时遇到个错误。搜索了一下，找到一篇文章，邮件的大意是：pywinauto的作者没有在x64下搞过， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://iamlittlefive.github.io/blog/2013/05/27/the-problem-when-build-the-blog">
+  <link rel="canonical" href="http://iamlittlefive.github.io/blog/2013/06/17/pywinauto">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="LittlO fiVE" type="application/atom+xml">
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">搭建博客时遇到的一些问题</h1>
+      <h1 class="entry-title">Pywinauto</h1>
     
     
       <p class="meta">
@@ -85,7 +85,7 @@
   
 
 
-<time datetime="2013-05-27T22:29:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
+<time datetime="2013-06-17T23:35:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
         
 		
          | <a href="#comments">Comments</a>
@@ -95,23 +95,21 @@
   </header>
 
 
-<div class="entry-content"><h2>如何用build搭建博客</h2>
+<div class="entry-content"><h2>学习使用pywinauto</h2>
 
-<p>Google一下<strong>“Github + octopress”</strong>能搜出好多文章来。我也是根据各位大虾的经验一步一步来的。这里就不再赘述了。</p>
+<h3>安装pywinauto</h3>
 
-<h2>我遇到的一些问题</h2>
+<p>在32位系统下，安装基本没啥问题。<a href="http://sourceforge.net/projects/pywinauto/?source=dlp">下载</a>完安装（<em>python setup.py install</em>）即可。</p>
 
-<p><strong>问题1</strong>：bundle install时，总是有依赖文件安装不成功。我遇到两次，一次是fast-stemmer,这个把rubygems.org替换成ruby.taobao.org之后就OK了；另外一次是rdiscount 2.0.7.3安装不成功，后来把gemfile里面的2.0.7改成1.6.8就OK了，但是这样在使用的时候又遇到了其他问题，解决办法是，到github上把rdiscount 2.0.7.3单独下载下来，解压其中的文件，替换1.6.8里面的。哦，这些依赖文件都放在“YourRubyPath\lib\ruby\gems\1.9.1\gems”里。</p>
+<p>在64位系统下，安装时遇到个错误。搜索了一下，找到一篇<a href="http://comments.gmane.org/gmane.comp.python.pywinauto.user/207">文章</a>，邮件的大意是：pywinauto的作者没有在x64下搞过，这个报错的assert只是关于大小（或者长度），并且这个assert是写死的，就是给32位写的（作者本人当时可能就是用的32位系统）。并建议注释掉报错的assert语句再尝试。OK，尝试这种作法，安装成功。猜想另一种办法，安装32位的python应该也能OK吧，但是我没尝试，如果有人尝试的话，可以告诉我一下。</p>
 
-<p><strong>问题2</strong>：发布文章时，也就是rake deploy时，总是提示permission denied(public key)。github对这个问题有<a href="https://help.github.com/articles/error-permission-denied-publickey">解答</a> 。 可能需要把public key和private key都添加过去才能搞定，我这边是这样的。</p>
+<h3>使用pywinauto</h3>
 
-<blockquote><p><strong>生成public key:</strong> ssh-keygen -t rsa</p>
+<p>我也在研究，没啥可写的，先贴个资料吧。
+[1].<a href="http://nullege.com/codes/search/pywinauto.findwindows">http://nullege.com/codes/search/pywinauto.findwindows</a>
+[2].<a href="https://code.google.com/p/pywinauto/">https://code.google.com/p/pywinauto/</a></p>
 
-<p><strong>生成private key:</strong>ssh-keygen -t dsa</p></blockquote>
-
-<p><strong>问题3</strong>：发布文章时遇到的另外一个问题是包含中文时，提示神马编码错误(好像是<strong><em>invalid byte sequence in GBK</em></strong>)，在v2ex上找到一个<a href="http://www.v2ex.com/t/26027">解决办法</a>：把报错文件中的self.content = File.read(File.join(base, name)）改成self.content = File.read(File.join(base, name), :encoding => &ldquo;utf-8&rdquo;)</p>
-
-<p>OK，记得的差不多就这么多，还在折腾中。。。Fighting!</p>
+<p>后续补充其他内容。</p>
 </div>
 
 
@@ -134,7 +132,7 @@
   
 
 
-<time datetime="2013-05-27T22:29:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
+<time datetime="2013-06-17T23:35:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
       
 
 
@@ -143,7 +141,7 @@
       <!--
 <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://iamlittlefive.github.io/blog/2013/05/27/the-problem-when-build-the-blog/" data-via="" data-counturl="http://iamlittlefive.github.io/blog/2013/05/27/the-problem-when-build-the-blog/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://iamlittlefive.github.io/blog/2013/06/17/pywinauto/" data-via="" data-counturl="http://iamlittlefive.github.io/blog/2013/06/17/pywinauto/" >Tweet</a>
   
   
   
@@ -165,10 +163,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/25/my-first-blog-in-github/" title="Previous Post: My First Blog in Github">&laquo; My First Blog in Github</a>
+        <a class="basic-alignment left" href="/blog/2013/05/27/the-problem-when-build-the-blog/" title="Previous Post: 搭建博客时遇到的一些问题">&laquo; 搭建博客时遇到的一些问题</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/06/17/pywinauto/" title="Next Post: pywinauto">pywinauto &raquo;</a>
       
     </p>
   </footer>
