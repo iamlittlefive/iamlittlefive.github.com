@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My First Blog in Github - LittlO fiVE</title>
+  <title>利用脚本自动添加文档注释 - LittlO fiVE</title>
   <meta name="author" content="littlefive">
 
   
-  <meta name="description" content="欢迎来到Little Five的博客 Littlefive是高中时某童鞋给取得外号，和自己名字比较接近，就一直保留使用。 LittleFive对python、windows编程比较感兴趣，以后会经常在这里发表一些学习经验，希望朋友们多多指教。 我的年轻没有失败
-">
+  <meta name="description" content="利用脚本自动添加文档注释 思路 就是在文档前面加上一些文档说明、编辑日期、修订记录什么的。具体作法是： 1、对新建文件，直接在文档前面添加； 2、对已有文件，要在文档的最前面添加的话，可以先把文档内容读到一个临时文件中，然后添加注释，再把文档原内容写入进去； 代码 # coding: utf-8 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://iamlittlefive.github.io/blog/2013/05/25/my-first-blog-in-github">
+  <link rel="canonical" href="http://iamlittlefive.github.io/blog/2013/06/18/python-addfilecomment">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="LittlO fiVE" type="application/atom+xml">
@@ -70,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">My First Blog in Github</h1>
+      <h1 class="entry-title">利用脚本自动添加文档注释</h1>
     
     
       <p class="meta">
@@ -86,7 +85,7 @@
   
 
 
-<time datetime="2013-05-25T22:28:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+<time datetime="2013-06-18T23:56:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2013</time>
         
 		
          | <a href="#comments">Comments</a>
@@ -96,15 +95,129 @@
   </header>
 
 
-<div class="entry-content"><h2>欢迎来到Little Five的博客</h2>
+<div class="entry-content"><h2>利用脚本自动添加文档注释</h2>
 
-<p><strong>Littlefive</strong>是高中时某童鞋给取得外号，和自己名字比较接近，就一直保留使用。</p>
+<h3>思路</h3>
 
-<p><strong>LittleFive</strong>对python、windows编程比较感兴趣，以后会经常在这里发表一些学习经验，希望朋友们多多指教。</p>
+<p>就是在文档前面加上一些文档说明、编辑日期、修订记录什么的。具体作法是：</p>
 
-<hr />
+<blockquote><p>1、对新建文件，直接在文档前面添加；</p>
 
-<p>我的年轻没有失败</p>
+<p>2、对已有文件，要在文档的最前面添加的话，可以先把文档内容读到一个临时文件中，然后添加注释，再把文档原内容写入进去；</p></blockquote>
+
+<h3>代码</h3>
+
+<pre><code># coding: utf-8
+#==========================================
+# @Author: tedsun
+# @Desc: 在python文件上添加文档注释
+# @FileName: AddFileComment.py
+# @Date: 2013.6.13
+# @ModifyHistory:
+# @Remark: 一种简单的思路是，直接在文件前面
+#  添加字符串。另一种是一行一行的添
+#  加，可以指定添加一些内容，如名字
+#==========================================
+
+import os
+import sys
+
+# 默认格式，实际没有用到
+FILE_COMMENT = """#coding: utf-8
+#==========================================
+# @Author: tedsun
+# @Desc: 
+# @FileName: 
+# @Date: 
+# @ModifyHistory: 
+# @Remark: 
+#==========================================
+"""
+#
+# 读取文件名并添加指定格式的文档注释
+# @filename: 需要添加文档注释的文件名
+#
+def addCommentToExistedFile(filename):
+    tmpFileName = filename + '.tmp'
+    tmpFile = open(tmpFileName,'w')
+    tmpFile.write(open(filename,'rb').read())
+    file = open(filename)
+    for line in file.readlines():
+        tmpFile.write(line)
+    tmpFile.close()
+    file.close()
+
+    file = open(filename,'w')
+    # file.write(FILE_COMMENT)
+    addComment(file)
+    tmpFile = open(tmpFileName)
+    for line in tmpFile.readlines():
+        file.write(line)
+    tmpFile.close()
+    file.close()
+    os.remove(tmpFileName)
+#
+# 用来添加注释
+# @file：文件句柄，打开和关闭均需要在函数外完成
+#   
+def addComment(file):
+    file.write("#coding: utf-8\n")
+    file.write("#==========================================\n")
+    file.write("# @Author: tedsun\n")
+    file.write("# @Desc: \n")
+    file.write("# @FileName: ")
+    # 获取文件名
+    file.write(sys.argv[1])
+    file.write("\n")
+    file.write("# @Date: ")
+    # 获取当前时间
+    import time
+    fileTime = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+    file.write(fileTime)
+    file.write('\n')
+    file.write("# @ModifyHistory: \n")
+    file.write("# @Remark: \n")
+    file.write("#==========================================\n")
+#
+# 从命令行创建新文件时，添加文件头
+# @filename：传入文件名即可，从命令行获得
+#
+def newFile(filename,choice=0):
+    # 如果不存在该文件，则直接新建
+    if not os.path.exists(filename):
+        file = open(filename,'w')
+        if choice == 0:
+            file.write(FILE_COMMENT)
+        else:
+            addComment(file)
+        file.close()
+    else:
+        addCommentToExistedFile(filename)       
+
+if __name__ == "__main__":
+    filename = sys.argv[1]
+    newFile(filename,1)
+</code></pre>
+
+<p>使用示例：</p>
+
+<pre><code>E:\PythonFight&gt;AddFileComment.py littlefive.py
+</code></pre>
+
+<p>这样的话littlefive.py前面应该就自动生成了一段注释：</p>
+
+<pre><code>#coding: utf-8
+#==========================================
+# @Author: tedsun
+# @Desc: 
+# @FileName: littlefive.py
+# @Date: 2013-06-19
+# @ModifyHistory: 
+# @Remark: 
+#==========================================
+</code></pre>
+
+<p>木有用插件，代码看起来比较挫~python初学，多多指教~</p>
 </div>
 
 
@@ -127,7 +240,7 @@
   
 
 
-<time datetime="2013-05-25T22:28:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+<time datetime="2013-06-18T23:56:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2013</time>
       
 
 
@@ -136,7 +249,7 @@
       <!--
 <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://iamlittlefive.github.io/blog/2013/05/25/my-first-blog-in-github/" data-via="" data-counturl="http://iamlittlefive.github.io/blog/2013/05/25/my-first-blog-in-github/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://iamlittlefive.github.io/blog/2013/06/18/python-addfilecomment/" data-via="" data-counturl="http://iamlittlefive.github.io/blog/2013/06/18/python-addfilecomment/" >Tweet</a>
   
   
   
@@ -158,8 +271,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/06/17/pywinauto/" title="Previous Post: pywinauto学习">&laquo; pywinauto学习</a>
       
-        <a class="basic-alignment right" href="/blog/2013/05/27/the-problem-when-build-the-blog/" title="Next Post: 搭建博客时遇到的一些问题">搭建博客时遇到的一些问题 &raquo;</a>
       
     </p>
   </footer>

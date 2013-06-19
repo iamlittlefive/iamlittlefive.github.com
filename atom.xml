@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2013-06-17T23:48:40+08:00</updated>
+  <updated>2013-06-19T22:15:06+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -14,7 +14,138 @@
 
   
   <entry>
-    <title type="html"><![CDATA[pywinauto]]></title>
+    <title type="html"><![CDATA[利用脚本自动添加文档注释]]></title>
+    <link href="http://iamlittlefive.github.io/blog/2013/06/18/python-addfilecomment/"/>
+    <updated>2013-06-18T23:56:00+08:00</updated>
+    <id>http://iamlittlefive.github.io/blog/2013/06/18/python-addfilecomment</id>
+    <content type="html"><![CDATA[<h2>利用脚本自动添加文档注释</h2>
+
+<h3>思路</h3>
+
+<p>就是在文档前面加上一些文档说明、编辑日期、修订记录什么的。具体作法是：</p>
+
+<blockquote><p>1、对新建文件，直接在文档前面添加；</p>
+
+<p>2、对已有文件，要在文档的最前面添加的话，可以先把文档内容读到一个临时文件中，然后添加注释，再把文档原内容写入进去；</p></blockquote>
+
+<h3>代码</h3>
+
+<pre><code># coding: utf-8
+#==========================================
+# @Author: tedsun
+# @Desc: 在python文件上添加文档注释
+# @FileName: AddFileComment.py
+# @Date: 2013.6.13
+# @ModifyHistory:
+# @Remark: 一种简单的思路是，直接在文件前面
+#  添加字符串。另一种是一行一行的添
+#  加，可以指定添加一些内容，如名字
+#==========================================
+
+import os
+import sys
+
+# 默认格式，实际没有用到
+FILE_COMMENT = """#coding: utf-8
+#==========================================
+# @Author: tedsun
+# @Desc: 
+# @FileName: 
+# @Date: 
+# @ModifyHistory: 
+# @Remark: 
+#==========================================
+"""
+#
+# 读取文件名并添加指定格式的文档注释
+# @filename: 需要添加文档注释的文件名
+#
+def addCommentToExistedFile(filename):
+    tmpFileName = filename + '.tmp'
+    tmpFile = open(tmpFileName,'w')
+    tmpFile.write(open(filename,'rb').read())
+    file = open(filename)
+    for line in file.readlines():
+        tmpFile.write(line)
+    tmpFile.close()
+    file.close()
+
+    file = open(filename,'w')
+    # file.write(FILE_COMMENT)
+    addComment(file)
+    tmpFile = open(tmpFileName)
+    for line in tmpFile.readlines():
+        file.write(line)
+    tmpFile.close()
+    file.close()
+    os.remove(tmpFileName)
+#
+# 用来添加注释
+# @file：文件句柄，打开和关闭均需要在函数外完成
+#   
+def addComment(file):
+    file.write("#coding: utf-8\n")
+    file.write("#==========================================\n")
+    file.write("# @Author: tedsun\n")
+    file.write("# @Desc: \n")
+    file.write("# @FileName: ")
+    # 获取文件名
+    file.write(sys.argv[1])
+    file.write("\n")
+    file.write("# @Date: ")
+    # 获取当前时间
+    import time
+    fileTime = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+    file.write(fileTime)
+    file.write('\n')
+    file.write("# @ModifyHistory: \n")
+    file.write("# @Remark: \n")
+    file.write("#==========================================\n")
+#
+# 从命令行创建新文件时，添加文件头
+# @filename：传入文件名即可，从命令行获得
+#
+def newFile(filename,choice=0):
+    # 如果不存在该文件，则直接新建
+    if not os.path.exists(filename):
+        file = open(filename,'w')
+        if choice == 0:
+            file.write(FILE_COMMENT)
+        else:
+            addComment(file)
+        file.close()
+    else:
+        addCommentToExistedFile(filename)       
+
+if __name__ == "__main__":
+    filename = sys.argv[1]
+    newFile(filename,1)
+</code></pre>
+
+<p>使用示例：</p>
+
+<pre><code>E:\PythonFight&gt;AddFileComment.py littlefive.py
+</code></pre>
+
+<p>这样的话littlefive.py前面应该就自动生成了一段注释：</p>
+
+<pre><code>#coding: utf-8
+#==========================================
+# @Author: tedsun
+# @Desc: 
+# @FileName: littlefive.py
+# @Date: 2013-06-19
+# @ModifyHistory: 
+# @Remark: 
+#==========================================
+</code></pre>
+
+<p>木有用插件，代码看起来比较挫~python初学，多多指教~</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[pywinauto学习]]></title>
     <link href="http://iamlittlefive.github.io/blog/2013/06/17/pywinauto/"/>
     <updated>2013-06-17T23:35:00+08:00</updated>
     <id>http://iamlittlefive.github.io/blog/2013/06/17/pywinauto</id>
