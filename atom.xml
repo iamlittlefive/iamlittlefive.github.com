@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2013-06-19T22:15:06+08:00</updated>
+  <updated>2013-06-19T22:18:08+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -18,9 +18,7 @@
     <link href="http://iamlittlefive.github.io/blog/2013/06/18/python-addfilecomment/"/>
     <updated>2013-06-18T23:56:00+08:00</updated>
     <id>http://iamlittlefive.github.io/blog/2013/06/18/python-addfilecomment</id>
-    <content type="html"><![CDATA[<h2>利用脚本自动添加文档注释</h2>
-
-<h3>思路</h3>
+    <content type="html"><![CDATA[<h3>思路</h3>
 
 <p>就是在文档前面加上一些文档说明、编辑日期、修订记录什么的。具体作法是：</p>
 
@@ -149,9 +147,7 @@ if __name__ == "__main__":
     <link href="http://iamlittlefive.github.io/blog/2013/06/17/pywinauto/"/>
     <updated>2013-06-17T23:35:00+08:00</updated>
     <id>http://iamlittlefive.github.io/blog/2013/06/17/pywinauto</id>
-    <content type="html"><![CDATA[<h2>学习使用pywinauto</h2>
-
-<h3>安装pywinauto</h3>
+    <content type="html"><![CDATA[<h3>安装pywinauto</h3>
 
 <p>在32位系统下，安装基本没啥问题。<a href="http://sourceforge.net/projects/pywinauto/?source=dlp">下载</a>完安装（<em>python setup.py install</em>）即可。</p>
 
