@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>pywinauto学习 - LittlO fiVE</title>
+  <title>selenium-python文档（1） - LittlO fiVE</title>
   <meta name="author" content="littlefive">
 
   
-  <meta name="description" content="安装pywinauto 在32位系统下，安装基本没啥问题。下载完安装（python setup.py install）即可。 在64位系统下，安装时遇到个错误。搜索了一下，找到一篇文章，邮件的大意是：pywinauto的作者没有在x64下搞过，这个报错的assert只是关于大小（或者长度）， &hellip;">
+  <meta name="description" content="本文翻译自：http://selenium-python.readthedocs.org/en/latest/installation.html 做了部分简化，也可能存在翻译不准确的地方，如果有时间的话建议参考原文。本文仅作为读书笔记。 1、安装selenium-python 1.1、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://iamlittlefive.github.io/blog/2013/06/17/pywinauto">
+  <link rel="canonical" href="http://iamlittlefive.github.io/blog/2013/06/22/docs-of-selenium">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="LittlO fiVE" type="application/atom+xml">
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Pywinauto学习</h1>
+      <h1 class="entry-title">Selenium-python文档（1）</h1>
     
     
       <p class="meta">
@@ -85,7 +85,7 @@
   
 
 
-<time datetime="2013-06-17T23:35:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
+<time datetime="2013-06-22T20:09:00+08:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2013</time>
         
 		
          | <a href="#comments">Comments</a>
@@ -95,19 +95,80 @@
   </header>
 
 
-<div class="entry-content"><h3>安装pywinauto</h3>
+<div class="entry-content"><p>本文翻译自：<a href="http://selenium-python.readthedocs.org/en/latest/installation.html">http://selenium-python.readthedocs.org/en/latest/installation.html</a></p>
 
-<p>在32位系统下，安装基本没啥问题。<a href="http://sourceforge.net/projects/pywinauto/?source=dlp">下载</a>完安装（<em>python setup.py install</em>）即可。</p>
+<p>做了部分简化，也可能存在翻译不准确的地方，如果有时间的话建议参考原文。本文仅作为读书笔记。</p>
 
-<p>在64位系统下，安装时遇到个错误。搜索了一下，找到一篇<a href="http://comments.gmane.org/gmane.comp.python.pywinauto.user/207">文章</a>，邮件的大意是：pywinauto的作者没有在x64下搞过，这个报错的assert只是关于大小（或者长度），并且这个assert是写死的，就是给32位写的（作者本人当时可能就是用的32位系统）。并建议注释掉报错的assert语句再尝试。OK，尝试这种作法，安装成功。猜想另一种办法，安装32位的python应该也能OK吧，但是我没尝试，如果有人尝试的话，可以告诉我一下。</p>
+<h3>1、安装selenium-python</h3>
 
-<h3>使用pywinauto</h3>
+<h4>1.1、selenium-python介绍</h4>
 
-<p>我也在研究，没啥可写的，先贴个资料吧。
-[1].<a href="http://nullege.com/codes/search/pywinauto.findwindows">http://nullege.com/codes/search/pywinauto.findwindows</a>
-[2].<a href="https://code.google.com/p/pywinauto/">https://code.google.com/p/pywinauto/</a></p>
+<p>Selenium Python bindings（selenium的python 绑定？）提供了一个用来编写功能/验收测试的API。通过该API我们可以直接访问Selenium Webdriver的所有功能。</p>
 
-<p>后续补充其他内容。</p>
+<p>Selenium Python bindings 提供了一个方便的API来访问Firefox、IE、Chrome、Remote（是什么？）等Selenium WebDrivers。当前支持的python版本是2.6、2.7、3.2和3.3。</p>
+
+<p>该文档仅解释了Selenium 2 WebDriver 的API。</p>
+
+<h4>1.2、下载安装</h4>
+
+<p>可以直接下载<a href="https://pypi.python.org/pypi/selenium" title="selenium">selenium</a>的程序包。也可以使用下面两个命令下载安装。</p>
+
+<blockquote><p><code>easy_install selenium</code></p></blockquote>
+
+<p>或者</p>
+
+<blockquote><p><code>pip install selenium</code></p></blockquote>
+
+<p>pip工具什么的，直接下载<a href="http://www.activestate.com/activepython" title="ActivePython">ActivePython</a>然后安装就可以了，什么东西都会安装好。（当然，如果你已经安装了python，那单独下载<a href="https://pypi.python.org/pypi/pip" title="pip">pip</a>工具也可以）</p>
+
+<h4>1.3、windows下安装的详细说明</h4>
+
+<p>1、安装<a href="http://www.python.org/download/" title="Python 2.7">python 2.7</a>。</p>
+
+<p>2、创建一个名为C:\seltests的文件夹，然后下载<a href="http://www.virtualenv.org/en/latest/">virtualenv.py</a>脚本到这个文件夹下面。</p>
+
+<p>如果已经下载并正确的保存了程序，请确保virtualenv.py文件在系统中的C:\seltests\virtualenv.py目录下存在。</p>
+
+<blockquote><p>注：我觉的这个目录可以自己定义。F:\test应该也可以。</p>
+
+<p>virtualenv.py是一个创建隔离的python环境的工具。virtualenv要解决的根本问题是库的版本和依赖。</p>
+
+<p><strong>参考</strong>：</p>
+
+<p>[1]<a href="http://blogs.360.cn/blog/how-360-uses-python-1-virtualenv/">http://blogs.360.cn/blog/how-360-uses-python-1-virtualenv/</a>
+[2]<a href="http://www.google.com.hk/#newwindow=1&amp;safe=strict&amp;q=virtualenv&amp;oq=virtualenv&amp;gs_l=serp.12...1402706.1402706.2.1403563.1.1.0.0.0.0.0.0..0.0...0.0.0..1c.1.17.serp.SHLt7imthmg&amp;bav=on.2,or.&amp;bvm=bv.48293060,d.aGc&amp;fp=6689d644bd27690b&amp;biw=1366&amp;bih=643">Google一下</a></p></blockquote>
+
+<p>3、在命令行进入到C:\seltests目录，然后执行命令:</p>
+
+<pre><code>python virtualenv.py selenv
+</code></pre>
+
+<p>该命令将会在C:\seltests目录下创建名为selenv的文件夹，该文件夹包含了一个python的虚拟环境。</p>
+
+<p>4、使用下面的命令安装selenium</p>
+
+<pre><code>C:\seltests\selenv\Scripts\pip.exe install selenium
+</code></pre>
+
+<blockquote><p>注意把C:\seltests替换成你实际使用的目录</p></blockquote>
+
+<p>现在你就可以在这个python 虚拟环境下运行你的测试脚本了。命令为：</p>
+
+<pre><code>C:\seltests\selenv\Scripts\python.exe Your Scripts
+</code></pre>
+
+<h4>1.4、下载Selenium Server</h4>
+
+<blockquote><p>注：只有在使用远程webDriver时，才需要Selenium Server</p></blockquote>
+
+<p>Selenium server 是一个Java 程序。需要安装Java 运行时环境（JRE）来运行Selenium server.</p>
+
+<p>你可以在<a href="http://seleniumhq.org/download/" title="靠，这个老访问不了">这里</a>下载 Selenium server 2.x 。注意文件名应该是这种格式：<strong><em>selenium-server-standalone-2.x.x.jar</em></strong>。建议下载最新的2.x版本。</p>
+
+<p>运行selenium server的命令为：</p>
+
+<pre><code>java -jar selenium-server-standalone-2.x.x.jar
+</code></pre>
 </div>
 
 
@@ -130,7 +191,7 @@
   
 
 
-<time datetime="2013-06-17T23:35:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
+<time datetime="2013-06-22T20:09:00+08:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2013</time>
       
 
 
@@ -139,7 +200,7 @@
       <!--
 <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://iamlittlefive.github.io/blog/2013/06/17/pywinauto/" data-via="" data-counturl="http://iamlittlefive.github.io/blog/2013/06/17/pywinauto/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://iamlittlefive.github.io/blog/2013/06/22/docs-of-selenium/" data-via="" data-counturl="http://iamlittlefive.github.io/blog/2013/06/22/docs-of-selenium/" >Tweet</a>
   
   
   
@@ -161,10 +222,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/27/the-problem-when-build-the-blog/" title="Previous Post: 搭建博客时遇到的一些问题">&laquo; 搭建博客时遇到的一些问题</a>
+        <a class="basic-alignment left" href="/blog/2013/06/19/dont-make-me-think/" title="Previous Post: 《Don't make me think》读书笔记">&laquo; 《Don't make me think》读书笔记</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/06/18/python-addfilecomment/" title="Next Post: 利用脚本自动添加文档注释">利用脚本自动添加文档注释 &raquo;</a>
       
     </p>
   </footer>
