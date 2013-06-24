@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2013-06-24T22:19:05+08:00</updated>
+  <updated>2013-06-24T22:21:15+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[selenium 文档（2）]]></title>
+    <title type="html"><![CDATA[selenium-python 文档（2）]]></title>
     <link href="http://iamlittlefive.github.io/blog/2013/06/24/docs2-of-selenium/"/>
     <updated>2013-06-24T20:49:00+08:00</updated>
     <id>http://iamlittlefive.github.io/blog/2013/06/24/docs2-of-selenium</id>
