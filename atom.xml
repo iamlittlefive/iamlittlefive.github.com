@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2013-06-24T22:21:15+08:00</updated>
+  <updated>2013-06-26T23:25:05+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[selenium-python 文档（3）]]></title>
+    <link href="http://iamlittlefive.github.io/blog/2013/06/26/docs3-of-selenium/"/>
+    <updated>2013-06-26T22:15:00+08:00</updated>
+    <id>http://iamlittlefive.github.io/blog/2013/06/26/docs3-of-selenium</id>
+    <content type="html"><![CDATA[<h3>3、访问网页</h3>
+
+<p>估计你用WebDriver要做的第一件事就是打开一个链接。通常可以使用get方法。</p>
+
+<pre><code>driver.get("http://www.google.com")
+</code></pre>
+
+<h4>3.1、和页面交互</h4>
+
+<p>仅仅能打开页面是远远不够的，我们希望能和页面（或者特指包含html元素的页面）进行交互。首先，我们需要找到一个元素。WebDriver提供了大量的方法来查找元素。例如，当前有一个这样的元素：</p>
+
+<pre><code>&lt;input type="text" name="passwd" id="passwd-id" /&gt;
+</code></pre>
+
+<p>那我们可以通过下面任一种方式来查找它：</p>
+
+<pre><code>element = driver.find_element_by_id("passwd-id")
+element = driver.find_element_by_name("passwd")
+element = driver.find_element_by_xpath("//input[@id='passwd-id']")
+</code></pre>
+
+<p>我们也可以通过文本来找到一个节点，但是注意这段文本要精确匹配。另外在WebDriver中使用XPATH的时候要注意，如果在查询时匹配到多个元素，那只会返回第一个。如果什么都没找到，那就会引发一个<code>NoSuchElementException</code>异常。</p>
+
+<p>如果我们已经查找到了一个元素，那可以做点什么呢？首先，我们可以往一个文本框中输入一段文字。</p>
+
+<pre><code>element.send_keys("some text")
+</code></pre>
+
+<p>我们也可以这样模拟输入箭头：</p>
+
+<pre><code>element.send_keys(" and some",Keys.ARROW_DOWN)
+</code></pre>
+
+<p>我们可以在所有元素上调用send_keys方法，这使得我们可以测试页面上的一些快捷键。一点要注意的地方时，输入到文本框中的东西不会自动清除。相反，你的输入会叠加在已有输入的后面。当然，可以利用clear方法清除掉这些内容。</p>
+
+<pre><code>element.clear()
+</code></pre>
+
+<blockquote><p>注：刚测试一段代码时，输入的文本是中文，报了个编码错误。查了下，可以这样搞定，在中文前面加上个u。测试代码，注意“360大流氓”前边那个u就可以了：</p>
+
+<pre><code># coding: utf-8    
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+driver = webdriver.Firefox()
+driver.get("http://www.baidu.com")
+assert u"百度" in driver.title
+elem = driver.find_element_by_name("wd")
+elem.send_keys(u"360大流氓")
+# 也可以使用elem.summit()来提交
+elem.send_keys(Keys.RETURN)
+print driver.title
+driver.close()
+</code></pre></blockquote>
+
+<p>好累，还有那么多，明天再搞，洗洗睡了~</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[selenium-python 文档（2）]]></title>
