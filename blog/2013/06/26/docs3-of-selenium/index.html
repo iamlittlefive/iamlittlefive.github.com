@@ -150,7 +150,61 @@ print driver.title
 driver.close()
 </code></pre></blockquote>
 
-<p>好累，还有那么多，明天再搞，洗洗睡了~</p>
+<h4>填表单</h4>
+
+<p>我们已经见过怎么往文本框中输入文本，那么其他元素呢？实际上我们还可以改变checkbox的勾选状态，就想选择标签那样把某个元素变为选中状态。要做到这样并不难。</p>
+
+<pre><code>select = driver.find_element_by_xpath("//select")
+all_options = select.find_elements_by_tag_name("option")
+for option in all_options:
+    print "Value is: %s" % option.get_attribute("value")
+    option.click()
+</code></pre>
+
+<p>这段代码的作用是找到页面上的第一个select元素，然后循环点击下拉列表的每一个选项，并打印出对应的值。测试代码如下：</p>
+
+<pre><code>&lt;!--这是一段测试代码，保存该文件到一个目录--&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;select&gt;
+  &lt;option value ="volvo"&gt;Volvo&lt;/option&gt;
+  &lt;option value ="saab"&gt;Saab&lt;/option&gt;
+  &lt;option value="opel"&gt;Opel&lt;/option&gt;
+  &lt;option value="audi"&gt;Audi&lt;/option&gt;
+&lt;/select&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>然后运行下面的Python代码：</p>
+
+<pre><code>from selenium import webdriver
+
+driver = webdriver.Firefox()
+driver.get("你自己要访问的url")
+select = driver.find_element_by_xpath("//select")
+all_options = select.find_elements_by_tag_name("option")
+for option in all_options:
+    print "Value is: %s" % option.get_attribute("value")
+    option.click()  
+driver.close()
+</code></pre>
+
+<p>继续刚刚的话题，一旦你填完了表单，接下来该想的就是提交了，一种提交的方法就是点击表单里的“summit”按钮。</p>
+
+<pre><code>#假设提交按钮的id是submit
+driver.find_element_by_id("submit").click()
+</code></pre>
+
+<p>另外，WebDriver有一种方便的提交方法，这种方法对每一种元素都有效。如果你在一个表单内对某元素调用该方法，那么WebDriver会遍历整个DOM树直到找到表单的闭合节点，然后调用submit方法。如果该元素并没有处于一个表单之中，那么就会抛出一个<code>NoSuchElementException</code>的异常。</p>
+
+<pre><code>element.submit()
+</code></pre>
+
+<p>好累，还有那么多，明天再搞，顺便弄个提交表单的栗子，洗洗睡了~</p>
 </div>
 
 
