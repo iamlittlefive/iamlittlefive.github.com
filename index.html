@@ -207,7 +207,119 @@ driver.find_element_by_id("submit").click()
 <pre><code>element.submit()
 </code></pre>
 
-<p>好累，还有那么多，明天再搞，顺便弄个提交表单的栗子，洗洗睡了~</p>
+<h4>3.3、拖放</h4>
+
+<p>我们可以拖放或者移动一个元素，比如移动一段距离，拖放到另一个元素上面等。</p>
+
+<pre><code>element = driver.find_element_by_name("source")
+target = driver.find_element_by_name("target")
+</code></pre>
+
+<blockquote><p>这个没发现怎么用呢。</p></blockquote>
+
+<h4>3.4、在窗口及框架之间移动</h4>
+
+<p>现在的web应用基本都有很多框架（frames）。WebDriver提供了<code>switch_to_window</code>方法来支持窗口之间的移动。</p>
+
+<pre><code>driver.switch_to_window("windowName")
+</code></pre>
+
+<p>所有对driver的调用都是指向一个特定的窗口。但是怎样能知道窗口的名字呢？可以通过查看javascript脚本或者链接来打开它。</p>
+
+<pre><code>&lt;a href="somewhere.html" target="windowName"&gt;Click here to open a new window&lt;/a&gt;
+</code></pre>
+
+<p>另外，我们也可以把<strong>“窗口句柄”</strong>传给<code>switch_to_window</code>方法。可以通过这样的方法来打开没一个窗口：</p>
+
+<pre><code>for handle in driver.window_handles:
+    driver.switch_to_window(handle)
+</code></pre>
+
+<p>在frame之间切换可以使用：</p>
+
+<pre><code>driver.switch_to_frame("frameName")
+</code></pre>
+
+<p>可以通过.来访问subframes（子框架？），也可以通过序号来访问指定的框架。</p>
+
+<pre><code>driver.switch_to_frame("frameName.0.child")
+</code></pre>
+
+<p>上面这段代码将会访问当前框架（frameName指定）的名为“child”的子框架。所有的框架好像都是从最上层被计算的。</p>
+
+<blockquote><p>这一段也找不到什么栗子来演示。</p></blockquote>
+
+<h4>3.5、弹出框</h4>
+
+<p>Selenium WebDriver 本身就支持处理弹出的对话框。当触发了一个弹出框的操作，你可以通过下面这段代码访问alert框。</p>
+
+<pre><code>alert = driver.switch_to_alert()
+</code></pre>
+
+<p>alert会指向当前的alert对象，通过这个对象，那你可以执行接受、取消、读取内容或者输入一个提示。该接口对alerts、confirms、prompts等都有效。</p>
+
+<h4>3.6、访问：历史记录及定位</h4>
+
+<p>前面我们提过可以使用get方法访问一个页面。WebDriver有大量小型、以任务为主的接口，访问网页就是一个很有用的工作。</p>
+
+<pre><code>driver.get("http://www.google.com")
+</code></pre>
+
+<p>可以这样向前或者向后跳转页面。</p>
+
+<pre><code>driver.forward()
+driver.back()
+</code></pre>
+
+<p>请注意这项功能完全依赖于使用的driver。如果你在一个浏览器上使用另一个浏览器上的方法，那么当你调用这些方法时可能会发生一些意料之外的事情。（这一句感觉翻译不准确，大概意思就是说在跨浏览器时可能会有问题？）</p>
+
+<h4>3.7、Cookies</h4>
+
+<p>为了使用cookies，我们必须要在cookie有效的域中。</p>
+
+<pre><code># 进到正确的域中
+driver.get("http://www.example.com")
+# 现在设置cookie。该cookie对整个域名有效。
+cookie = {"key":"value"}
+driver.add_cookie(cookie)
+
+# 现在输出所有的cookie
+all_cookies = driver.get_cookies()
+for cookie_name,cookie_value in all_cookies:
+    print "%s -&gt; %s", cookie_name
+</code></pre>
+
+<h4>3.8、准备学习下一章</h4>
+
+<p>复习一下，准备学习下一章</p>
+
+<pre><code># coding: utf-8
+from selenium import webdriver
+
+driver = webdriver.Firefox()
+# 访问google主页
+driver.get("http://www.51buy.com")
+# 找到搜索框
+search_box = driver.find_element_by_name("q")
+# 输入"selenium-py文档"
+search_box.send_keys(u"超级笨")
+# 提交
+search_box.submit()
+# 后退
+driver.back()
+# 前进
+driver.forward()
+# 写个cookie
+test_cookie = {"QQ":10001}
+driver.add_cookie(test_cookie)
+# 读取cookie
+all_cookies = driver.get_cookies()
+# 下面这个for循环在我这里执行出错了，报 too many values to unpack貌似是访问时页面调的东西很多
+for cookie_name, cookie_value in all_cookies:
+    print "%s-&gt;%s", cookie_name, cookie_value
+
+driver.close()
+</code></pre>
 </div>
   
   
