@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2013-07-02T22:57:42+08:00</updated>
+  <updated>2013-07-21T22:59:14+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[【每天看点算法】插入排序]]></title>
+    <link href="http://iamlittlefive.github.io/blog/2013/07/11/clanguageday1-insertsort/"/>
+    <updated>2013-07-11T22:19:00+08:00</updated>
+    <id>http://iamlittlefive.github.io/blog/2013/07/11/clanguageday1-insertsort</id>
+    <content type="html"><![CDATA[<blockquote><p>本文及后续类似专题的文章均作为自己的读书笔记。算法描述摘自《算法精解：C语言描述》一书。后续不再特殊说明。</p>
+
+<h4>算法描述</h4>
+
+<p>原理很简单：<strong>就是从一串无序的数列中把数据一个个的取出来，然后插入到一个有序数列中去。</strong>
+打个比方，上体育课，一堆人跑出来了，体育老师一个个的叫出来，然后按身高排队，后面叫到的人自动找自己应该站的位置。</p></blockquote>
+
+<p><strong>缺点</strong>：每一个还没排序的数都需要和有序队列中的元素做比较。如果数据比较多就惨了。想像一下，操场上已经有100个人按身高拍好队了，第101个得一个个的跟这些人比，万一这一百个都比他矮那不惨了，得比完一百个。</p>
+
+<p><strong>优点</strong>：当一个元素插入时有序队列时，只需要遍历一次就可以了。</p>
+
+<pre><code>//记个比较简单的算法
+void insertSort(int a[],int n)
+{
+    for(int i = 1;i &lt; n; ++i)
+        for(int j = i - 1; j &gt;= 0 &amp;&amp; a[j]&lt;a[j+1]; --j)
+        {
+            swap(a[j],a[j+1]);
+        }
+}
+//原文地址:http://blog.csdn.net/morewindows/article/details/6665714
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[selenium-python 文档（3）]]></title>

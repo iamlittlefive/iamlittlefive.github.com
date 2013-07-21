@@ -9,7 +9,8 @@
   <meta name="author" content="littlefive">
 
   
-  <meta name="description" content="3、访问网页 估计你用WebDriver要做的第一件事就是打开一个链接。通常可以使用get方法。 driver.get("http://www.google.com") 3.1、和页面交互 仅仅能打开页面是远远不够的，我们希望能和页面（或者特指包含html元素的页面）进行交互。首先， &hellip;">
+  <meta name="description" content="本文及后续类似专题的文章均作为自己的读书笔记。算法描述摘自《算法精解：C语言描述》一书。后续不再特殊说明。 算法描述 原理很简单：就是从一串无序的数列中把数据一个个的取出来，然后插入到一个有序数列中去。
+打个比方，上体育课，一堆人跑出来了，体育老师一个个的叫出来，然后按身高排队， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/11/clanguageday1-insertsort/">【每天看点算法】插入排序</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-11T22:19:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2013</time>
+        
+		
+         | <a href="/blog/2013/07/11/clanguageday1-insertsort/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>本文及后续类似专题的文章均作为自己的读书笔记。算法描述摘自《算法精解：C语言描述》一书。后续不再特殊说明。</p>
+
+<h4>算法描述</h4>
+
+<p>原理很简单：<strong>就是从一串无序的数列中把数据一个个的取出来，然后插入到一个有序数列中去。</strong>
+打个比方，上体育课，一堆人跑出来了，体育老师一个个的叫出来，然后按身高排队，后面叫到的人自动找自己应该站的位置。</p></blockquote>
+
+<p><strong>缺点</strong>：每一个还没排序的数都需要和有序队列中的元素做比较。如果数据比较多就惨了。想像一下，操场上已经有100个人按身高拍好队了，第101个得一个个的跟这些人比，万一这一百个都比他矮那不惨了，得比完一百个。</p>
+
+<p><strong>优点</strong>：当一个元素插入时有序队列时，只需要遍历一次就可以了。</p>
+
+<pre><code>//记个比较简单的算法
+void insertSort(int a[],int n)
+{
+    for(int i = 1;i &lt; n; ++i)
+        for(int j = i - 1; j &gt;= 0 &amp;&amp; a[j]&lt;a[j+1]; --j)
+        {
+            swap(a[j],a[j+1]);
+        }
+}
+//原文地址:http://blog.csdn.net/morewindows/article/details/6665714
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1060,6 +1121,10 @@ if __name__ == "__main__":
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/11/clanguageday1-insertsort/">【每天看点算法】插入排序</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/26/docs3-of-selenium/">Selenium-python 文档（3）</a>
       </li>
     
@@ -1073,10 +1138,6 @@ if __name__ == "__main__":
     
       <li class="post">
         <a href="/blog/2013/06/19/dont-make-me-think/">《Don&#8217;t Make Me Think》读书笔记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/18/python-addfilecomment/">利用脚本自动添加文档注释</a>
       </li>
     
   </ul>
