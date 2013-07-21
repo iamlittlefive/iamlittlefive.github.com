@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2013-07-21T23:13:56+08:00</updated>
+  <updated>2013-07-21T23:58:25+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[游记-大屿山（香港）]]></title>
+    <link href="http://iamlittlefive.github.io/blog/2013/07/21/youji-dayushan-hongkong/"/>
+    <updated>2013-07-21T23:51:00+08:00</updated>
+    <id>http://iamlittlefive.github.io/blog/2013/07/21/youji-dayushan-hongkong</id>
+    <content type="html"><![CDATA[<h4>交通</h4>
+
+<p>我在福田口岸过关，搭港铁从<strong>落马洲</strong>到<strong>东涌</strong>，F口出站，走几步到一个巴士总站，搭23路去天坛大佛即可。</p>
+
+<p>交通花费：$52+$17.2=$69.2</p>
+
+<h4>风景</h4>
+
+<p>大屿山风景没得说，非常漂亮。</p>
+
+<p>照片传送门：<a href="http://user.qzone.qq.com/529181094#!app=4&amp;via=QZ.HashRefresh">http://user.qzone.qq.com/529181094#!app=4&amp;via=QZ.HashRefresh</a></p>
+
+<p>深刻赶脚去香港玩，大部分时间和钱都是花在地铁上了，这一点略坑。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[【每天看点算法】插入排序]]></title>
