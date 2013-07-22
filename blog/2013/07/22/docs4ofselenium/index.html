@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>pywinauto - LittlO fiVE</title>
+  <title>selenium python 文档（4） - LittlO fiVE</title>
   <meta name="author" content="littlefive">
 
   
-  <meta name="description" content="Pywinauto Jun 17th, 2013 Jun 17th, 2013 <!-- Tweet --> Comments var duoshuoQuery = {short_name:"iamlittlefive"}; (function(){ var ds = document. &hellip;">
+  <meta name="description" content="4.定位元素 在页面中定位元素的方法很多，你可以根据自己的需要选择最适合的。Selenium提供了下面这些方法： find_element_by_id
+find_element_by_name
+find_element_by_xpath
+find_element_by_link_text &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://iamlittlefive.github.io/pywinauto">
+  <link rel="canonical" href="http://iamlittlefive.github.io/blog/2013/07/22/docs4ofselenium">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="LittlO fiVE" type="application/atom+xml">
@@ -65,32 +68,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Pywinauto</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-17T23:34:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time></p>
-  </header>
-  
-  
-
-  
-    <footer>
+    
+      <h1 class="entry-title">Selenium Python 文档（4）</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -102,14 +88,127 @@
   
 
 
-<time datetime="2013-06-17T23:34:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
+<time datetime="2013-07-22T22:25:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2013</time>
+        
+		
+         | <a href="#comments">Comments</a>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>4.定位元素</h3>
+
+<p>在页面中定位元素的方法很多，你可以根据自己的需要选择最适合的。Selenium提供了下面这些方法：</p>
+
+<pre><code>find_element_by_id
+find_element_by_name
+find_element_by_xpath
+find_element_by_link_text
+find_element_by_partial_link_text
+find_element_by_tag_name
+find_element_by_class_name
+find_element_by_css_selector
+</code></pre>
+
+<p>如果要查找多个元素怎么办？别急，还有下面的这些方法：</p>
+
+<pre><code>find_elements_by_name
+find_elements_by_xpath
+find_elements_by_link_text
+find_elements_by_partial_link_text
+find_elements_by_tag_name
+find_elements_by_class_name
+find_elements_by_css_selector
+</code></pre>
+
+<p>可以看到，只是把<strong>element</strong>改成了<strong>elements</strong>而已。这些方法将会返回一个列表。</p>
+
+<h4>4.1.通过Id定位</h4>
+
+<p>当知道一个元素的id属性时，就可以使用这种方法来定位，该方法会返回匹配到的第一个元素的位置。如果没有任何元素有该id属性，将会抛出一个<code>NoSuchElementException</code>的异常。</p>
+
+<p>举个栗子，页面中包含了一段这样的代码：</p>
+
+<pre><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;form id="loginForm"&gt;
+            &lt;input name="username" type="text" /&gt;
+            &lt;input name="password" type="password" /&gt;
+            &lt;input name="continue" type="submit" value="Login" /&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;         
+</code></pre>
+
+<p>那可以通过这段代码来定位其中的表单：</p>
+
+<pre><code>login_form = driver.find_elements_by_id('loginForm')
+</code></pre>
+
+<h4>4.2.通过name定位</h4>
+
+<p>这个没啥好说的，就是把上面的id属性换成了name属性而已。</p>
+
+<p>沿用上面的代码。可以这样定位usernme &amp; password：</p>
+
+<pre><code>username = driver.find_element_by_name('username')
+password = driver.find_element_by_name('password')
+</code></pre>
+
+<p>稍微修改下原来的html代码。</p>
+
+<pre><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;form id="loginForm"&gt;
+            &lt;input name="username" type="text" /&gt;
+            &lt;input name="password" type="password" /&gt;
+            &lt;input name="continue" type="submit" value="Login" /&gt;
+            &lt;input name="continue" type="button" value="Clear" /&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt; 
+</code></pre>
+
+<p>增加了一个按钮。那么下面的这段代码实际上只会返回<strong>Login</strong>按钮。</p>
+
+<pre><code>continue = driver.find_element_by_name('continue')
+</code></pre>
+
+<p>先写这些，剩下的明天再搞。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <!--
+  
+
+<span class="byline author vcard">Posted by <span class="fn">littlefive</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-22T22:25:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <!--
 <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://iamlittlefive.github.io/pywinauto/index.html" data-via="" data-counturl="http://iamlittlefive.github.io/pywinauto/index.html" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://iamlittlefive.github.io/blog/2013/07/22/docs4ofselenium/" data-via="" data-counturl="http://iamlittlefive.github.io/blog/2013/07/22/docs4ofselenium/" >Tweet</a>
   
   
   
@@ -128,9 +227,14 @@
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1367661156260912" charset="utf-8"></script>
 <!-- JiaThis Button END -->
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2013/07/21/youji-dayushan-hongkong/" title="Previous Post: 游记-大屿山（香港）">&laquo; 游记-大屿山（香港）</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 
@@ -189,6 +293,8 @@
 
   
 </aside>
+
+
 
 
     </div>

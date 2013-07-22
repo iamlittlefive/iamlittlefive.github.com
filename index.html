@@ -9,7 +9,10 @@
   <meta name="author" content="littlefive">
 
   
-  <meta name="description" content="交通 我在福田口岸过关，搭港铁从落马洲到东涌，F口出站，走几步到一个巴士总站，搭23路去天坛大佛即可。 交通花费：$52+$17.2=$69.2 风景 大屿山风景没得说，非常漂亮。 照片传送门：http://user.qzone.qq.com/529181094#!app=4&amp;via=QZ &hellip;">
+  <meta name="description" content="4.定位元素 在页面中定位元素的方法很多，你可以根据自己的需要选择最适合的。Selenium提供了下面这些方法： find_element_by_id
+find_element_by_name
+find_element_by_xpath
+find_element_by_link_text &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +69,123 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/22/docs4ofselenium/">Selenium Python 文档（4）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-22T22:25:00+08:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2013</time>
+        
+		
+         | <a href="/blog/2013/07/22/docs4ofselenium/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>4.定位元素</h3>
+
+<p>在页面中定位元素的方法很多，你可以根据自己的需要选择最适合的。Selenium提供了下面这些方法：</p>
+
+<pre><code>find_element_by_id
+find_element_by_name
+find_element_by_xpath
+find_element_by_link_text
+find_element_by_partial_link_text
+find_element_by_tag_name
+find_element_by_class_name
+find_element_by_css_selector
+</code></pre>
+
+<p>如果要查找多个元素怎么办？别急，还有下面的这些方法：</p>
+
+<pre><code>find_elements_by_name
+find_elements_by_xpath
+find_elements_by_link_text
+find_elements_by_partial_link_text
+find_elements_by_tag_name
+find_elements_by_class_name
+find_elements_by_css_selector
+</code></pre>
+
+<p>可以看到，只是把<strong>element</strong>改成了<strong>elements</strong>而已。这些方法将会返回一个列表。</p>
+
+<h4>4.1.通过Id定位</h4>
+
+<p>当知道一个元素的id属性时，就可以使用这种方法来定位，该方法会返回匹配到的第一个元素的位置。如果没有任何元素有该id属性，将会抛出一个<code>NoSuchElementException</code>的异常。</p>
+
+<p>举个栗子，页面中包含了一段这样的代码：</p>
+
+<pre><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;form id="loginForm"&gt;
+            &lt;input name="username" type="text" /&gt;
+            &lt;input name="password" type="password" /&gt;
+            &lt;input name="continue" type="submit" value="Login" /&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;         
+</code></pre>
+
+<p>那可以通过这段代码来定位其中的表单：</p>
+
+<pre><code>login_form = driver.find_elements_by_id('loginForm')
+</code></pre>
+
+<h4>4.2.通过name定位</h4>
+
+<p>这个没啥好说的，就是把上面的id属性换成了name属性而已。</p>
+
+<p>沿用上面的代码。可以这样定位usernme &amp; password：</p>
+
+<pre><code>username = driver.find_element_by_name('username')
+password = driver.find_element_by_name('password')
+</code></pre>
+
+<p>稍微修改下原来的html代码。</p>
+
+<pre><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;form id="loginForm"&gt;
+            &lt;input name="username" type="text" /&gt;
+            &lt;input name="password" type="password" /&gt;
+            &lt;input name="continue" type="submit" value="Login" /&gt;
+            &lt;input name="continue" type="button" value="Clear" /&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt; 
+</code></pre>
+
+<p>增加了一个按钮。那么下面的这段代码实际上只会返回<strong>Login</strong>按钮。</p>
+
+<pre><code>continue = driver.find_element_by_name('continue')
+</code></pre>
+
+<p>先写这些，剩下的明天再搞。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1111,54 +1231,9 @@ if __name__ == "__main__":
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/25/my-first-blog-in-github/">My First Blog in Github</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-25T22:28:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
-        
-		
-         | <a href="/blog/2013/05/25/my-first-blog-in-github/#comments">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>欢迎来到Little Five的博客</h2>
-
-<p><strong>Littlefive</strong>是高中时某童鞋给取得外号，和自己名字比较接近，就一直保留使用。</p>
-
-<p><strong>LittleFive</strong>对python、windows编程比较感兴趣，以后会经常在这里发表一些学习经验，希望朋友们多多指教。</p>
-
-<hr />
-
-<p>我的年轻没有失败</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+    <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -1169,6 +1244,10 @@ if __name__ == "__main__":
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/22/docs4ofselenium/">Selenium Python 文档（4）</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/21/youji-dayushan-hongkong/">游记-大屿山（香港）</a>
@@ -1184,10 +1263,6 @@ if __name__ == "__main__":
     
       <li class="post">
         <a href="/blog/2013/06/24/docs2-of-selenium/">Selenium-python 文档（2）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/22/docs-of-selenium/">Selenium-python文档（1）</a>
       </li>
     
   </ul>
