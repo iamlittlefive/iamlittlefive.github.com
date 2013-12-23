@@ -176,6 +176,14 @@ password = driver.find_element_by_name('password')
 <pre><code>continue = driver.find_element_by_name('continue')
 </code></pre>
 
+<h4>4.3.通过XPath定位</h4>
+
+<p><a href="http://www.w3school.com.cn/xpath/">XPath</a>是用来在XML文档中定位节点的一种语言。HTML可以理解为XML的一种实现，使用Selenium的人可以利用这一强大的语言在他们的web应用中定位元素。XPath扩展（也同样支持）了通过id或name属性定位的简单方法，并且开创了很多种新的可能性，比如定位页面上的第三个复选框。（the third checkbox是不是是这么译？）</p>
+
+<p>使用XPath的一大理由就是当你找不到合适的id或者name定位元素时，你还可以使用XPath。在使用XPath时，可以以绝对的方式定位元素（不建议），或者以相对于某一指定元素（有id或者name）的方式定位。XPath定位器也能够用除了id和name之外的属性来指定元素。</p>
+
+<p>后面一段翻译不好，对这里理解不好呢</p>
+
 <p>先写这些，剩下的明天再搞。</p>
 </div>
 
@@ -233,6 +241,8 @@ password = driver.find_element_by_name('password')
         <a class="basic-alignment left" href="/blog/2013/07/21/youji-dayushan-hongkong/" title="Previous Post: 游记-大屿山（香港）">&laquo; 游记-大屿山（香港）</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/09/08/python-object/" title="Next Post: python_object">python_object &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -265,6 +275,14 @@ password = driver.find_element_by_name('password')
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/12/23/lianchengjue/">小舞说武：《连城诀》读后感</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/08/python-object/">Python_object</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/22/docs4ofselenium/">Selenium Python 文档（4）</a>
       </li>
     
@@ -274,14 +292,6 @@ password = driver.find_element_by_name('password')
     
       <li class="post">
         <a href="/blog/2013/07/11/clanguageday1-insertsort/">【每天看点算法】插入排序</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/26/docs3-of-selenium/">Selenium-python 文档（3）</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/24/docs2-of-selenium/">Selenium-python 文档（2）</a>
       </li>
     
   </ul>
