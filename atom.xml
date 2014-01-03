@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2013-12-23T22:00:40+08:00</updated>
+  <updated>2014-01-03T23:01:24+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用win32diskimager写sd卡时遇到的lock error 5错误]]></title>
+    <link href="http://iamlittlefive.github.io/blog/2014/01/03/win32diskimagerproblem/"/>
+    <updated>2014-01-03T22:45:00+08:00</updated>
+    <id>http://iamlittlefive.github.io/blog/2014/01/03/win32diskimagerproblem</id>
+    <content type="html"><![CDATA[<p>Google一下就有解答了。</p>
+
+<p><a href="http://oddsnsods.net/blog/?p=100" title="http://oddsnsods.net/blog/?p=100">http://oddsnsods.net/blog/?p=100</a></p>
+
+<p>没耐心看英文的童鞋继续往下看吧</p>
+
+<p>解决办法：</p>
+
+<p>1、打开命令行</p>
+
+<p>2、输入<code>diskpart</code>，会出现<strong><code>Diskpart&gt;</code></strong>的提示</p>
+
+<p>3、在<code>Diskpart&gt;</code>后面输入<code>list disk</code></p>
+
+<p>4、该命令会列出所有磁盘，eg.</p>
+
+<pre><code>  DISKPART&gt; list disk
+
+  磁盘 ###  状态            大小     可用      Dyn  Gpt
+  -------- -------------  -------  -------  ---  ---
+  磁盘 0    联机            465 GB   2048 KB
+  磁盘 1    联机             59 GB   1024 KB
+  磁盘 2    联机             14 GB      0 B
+
+  DISKPART&gt;
+</code></pre>
+
+<p>5、这里可以通过磁盘大小来判断sd卡是磁盘2</p>
+
+<p>6、在命令行那儿输入 <code>select disk 2</code> 选中磁盘2</p>
+
+<p>7、接下来输入 <code>list partition</code> 来检查磁盘分区</p>
+
+<pre><code>  DISKPART&gt; list partition
+
+  分区  ###       类型              大小      偏移量
+  -------------  ----------------  -------  -------
+  分区  1         主要              14 GB    4096 KB
+</code></pre>
+
+<p>8、这里只有一个分区</p>
+
+<p>9、选中该分区，<code>select partition 1</code></p>
+
+<p>10、<code>delete partition</code>，如果不行，就<code>delete partition override</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[小舞说武：《连城诀》读后感]]></title>

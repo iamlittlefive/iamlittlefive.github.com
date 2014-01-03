@@ -9,7 +9,7 @@
   <meta name="author" content="littlefive">
 
   
-  <meta name="description" content="安装pywinauto 在32位系统下，安装基本没啥问题。下载完安装（python setup.py install）即可。 在64位系统下，安装时遇到个错误。搜索了一下，找到一篇文章，邮件的大意是：pywinauto的作者没有在x64下搞过，这个报错的assert只是关于大小（或者长度）， &hellip;">
+  <meta name="description" content="思路 就是在文档前面加上一些文档说明、编辑日期、修订记录什么的。具体作法是： 1、对新建文件，直接在文档前面添加； 2、对已有文件，要在文档的最前面添加的话，可以先把文档内容读到一个临时文件中，然后添加注释，再把文档原内容写入进去； 代码 # coding: utf-8 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,165 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/18/python-addfilecomment/">利用脚本自动添加文档注释</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-18T23:56:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2013</time>
+        
+		
+         | <a href="/blog/2013/06/18/python-addfilecomment/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>思路</h3>
+
+<p>就是在文档前面加上一些文档说明、编辑日期、修订记录什么的。具体作法是：</p>
+
+<blockquote><p>1、对新建文件，直接在文档前面添加；</p>
+
+<p>2、对已有文件，要在文档的最前面添加的话，可以先把文档内容读到一个临时文件中，然后添加注释，再把文档原内容写入进去；</p></blockquote>
+
+<h3>代码</h3>
+
+<pre><code># coding: utf-8
+#==========================================
+# @Author: tedsun
+# @Desc: 在python文件上添加文档注释
+# @FileName: AddFileComment.py
+# @Date: 2013.6.13
+# @ModifyHistory:
+# @Remark: 一种简单的思路是，直接在文件前面
+#  添加字符串。另一种是一行一行的添
+#  加，可以指定添加一些内容，如名字
+#==========================================
+
+import os
+import sys
+
+# 默认格式，实际没有用到
+FILE_COMMENT = """#coding: utf-8
+#==========================================
+# @Author: tedsun
+# @Desc: 
+# @FileName: 
+# @Date: 
+# @ModifyHistory: 
+# @Remark: 
+#==========================================
+"""
+#
+# 读取文件名并添加指定格式的文档注释
+# @filename: 需要添加文档注释的文件名
+#
+def addCommentToExistedFile(filename):
+    tmpFileName = filename + '.tmp'
+    tmpFile = open(tmpFileName,'w')
+    tmpFile.write(open(filename,'rb').read())
+    file = open(filename)
+    for line in file.readlines():
+        tmpFile.write(line)
+    tmpFile.close()
+    file.close()
+
+    file = open(filename,'w')
+    # file.write(FILE_COMMENT)
+    addComment(file)
+    tmpFile = open(tmpFileName)
+    for line in tmpFile.readlines():
+        file.write(line)
+    tmpFile.close()
+    file.close()
+    os.remove(tmpFileName)
+#
+# 用来添加注释
+# @file：文件句柄，打开和关闭均需要在函数外完成
+#   
+def addComment(file):
+    file.write("#coding: utf-8\n")
+    file.write("#==========================================\n")
+    file.write("# @Author: tedsun\n")
+    file.write("# @Desc: \n")
+    file.write("# @FileName: ")
+    # 获取文件名
+    file.write(sys.argv[1])
+    file.write("\n")
+    file.write("# @Date: ")
+    # 获取当前时间
+    import time
+    fileTime = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+    file.write(fileTime)
+    file.write('\n')
+    file.write("# @ModifyHistory: \n")
+    file.write("# @Remark: \n")
+    file.write("#==========================================\n")
+#
+# 从命令行创建新文件时，添加文件头
+# @filename：传入文件名即可，从命令行获得
+#
+def newFile(filename,choice=0):
+    # 如果不存在该文件，则直接新建
+    if not os.path.exists(filename):
+        file = open(filename,'w')
+        if choice == 0:
+            file.write(FILE_COMMENT)
+        else:
+            addComment(file)
+        file.close()
+    else:
+        addCommentToExistedFile(filename)       
+
+if __name__ == "__main__":
+    filename = sys.argv[1]
+    newFile(filename,1)
+</code></pre>
+
+<p>使用示例：</p>
+
+<pre><code>E:\PythonFight&gt;AddFileComment.py littlefive.py
+</code></pre>
+
+<p>这样的话littlefive.py前面应该就自动生成了一段注释：</p>
+
+<pre><code>#coding: utf-8
+#==========================================
+# @Author: tedsun
+# @Desc: 
+# @FileName: littlefive.py
+# @Date: 2013-06-19
+# @ModifyHistory: 
+# @Remark: 
+#==========================================
+</code></pre>
+
+<p>木有用插件，代码看起来比较挫~python初学，多多指教~</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -235,6 +394,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/03/win32diskimagerproblem/">使用win32diskimager写sd卡时遇到的lock Error 5错误</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/12/23/lianchengjue/">小舞说武：《连城诀》读后感</a>
       </li>
     
@@ -250,10 +413,6 @@
         <a href="/blog/2013/07/21/youji-dayushan-hongkong/">游记-大屿山（香港）</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/11/clanguageday1-insertsort/">【每天看点算法】插入排序</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -267,7 +426,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - littlefive -
+  Copyright &copy; 2014 - littlefive -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
