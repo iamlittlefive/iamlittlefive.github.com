@@ -4,7 +4,7 @@
   <title><![CDATA[LittlO fiVE]]></title>
   <link href="http://iamlittlefive.github.io/atom.xml" rel="self"/>
   <link href="http://iamlittlefive.github.io/"/>
-  <updated>2014-01-03T23:01:24+08:00</updated>
+  <updated>2014-03-23T14:14:41+08:00</updated>
   <id>http://iamlittlefive.github.io/</id>
   <author>
     <name><![CDATA[littlefive]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[On The Way]]></title>
+    <link href="http://iamlittlefive.github.io/blog/2014/03/23/ontheway/"/>
+    <updated>2014-03-23T14:08:00+08:00</updated>
+    <id>http://iamlittlefive.github.io/blog/2014/03/23/ontheway</id>
+    <content type="html"><![CDATA[<p>昨天深圳百公里，走了三十多公里就下撤了，是休息了太长时间完全不想往下走了。</p>
+
+<p>路上听陶子，nino聊天，对工作生活有了一些新的感触。</p>
+
+<p>想想自己从小到大的生活，很少真正有自己的想法，不一定是有人阻挡自己，很可能是自己禁锢了自己的想法。</p>
+
+<p>1、生活上，培养一些爱好，一些自己真正喜欢并投入的事情。</p>
+
+<p>2、工作上，找到自己想钻研的方向，深入研究下去</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用win32diskimager写sd卡时遇到的lock error 5错误]]></title>
